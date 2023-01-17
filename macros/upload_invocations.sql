@@ -112,7 +112,7 @@
             null, {# dbt_vars #}
         {% endif %}
 
-        parse_json('{{ forceescape(tojson(invocation_args_dict)) }}'), {# invocation_args #}
+        parse_json('{{ tojson(invocation_args_dict) | forceescape }}'), {# invocation_args #}
         parse_json('{{ tojson(dbt_metadata_envs) }}') {# dbt_custom_envs #}
 
         )
