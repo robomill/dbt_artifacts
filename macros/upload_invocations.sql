@@ -63,7 +63,7 @@
             null, {# dbt_vars #}
         {% endif %}
 
-        '{{ tojson(invocation_args_dict) | forceescape }}', {# invocation_args #}
+        '{{ tojson(invocation_args_dict) | replace('\\', '\\\\')}}', {# invocation_args #}
         '{{ tojson(dbt_metadata_envs) }}' {# dbt_custom_envs #} 
 
     )
@@ -95,7 +95,7 @@
         {% if var('env_vars', none) %}
             {% set env_vars_dict = {} %}
             {% for env_variable in var('env_vars') %}
-                {% do env_vars_dict.update({env_variable: env_var(env_variable)}) %}
+                {% do env_vars_dict.update({env_variable: forceescape(env_var(env_variable))}) %}
             {% endfor %}
             parse_json('{{ tojson(env_vars_dict) }}'), {# env_vars #}
         {% else %}
@@ -112,7 +112,7 @@
             null, {# dbt_vars #}
         {% endif %}
 
-        parse_json('{{ tojson(invocation_args_dict) }}'), {# invocation_args #}
+        parse_json('{{ forceescape(tojson(invocation_args_dict)) }}'), {# invocation_args #}
         parse_json('{{ tojson(dbt_metadata_envs) }}') {# dbt_custom_envs #}
 
         )
