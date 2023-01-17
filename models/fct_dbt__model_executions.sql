@@ -21,6 +21,7 @@ model_executions as (
         rows_affected,
         {% if target.type == 'bigquery' %}
             bytes_processed,
+            job_id,
         {% endif %}
         materialization,
         schema, -- noqa

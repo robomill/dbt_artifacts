@@ -16,6 +16,7 @@ select
     cast(null as {{ type_int() }}) as rows_affected,
     {% if target.type == 'bigquery' %}
         cast(null as {{ type_int() }}) as bytes_processed,
+        cast(null as {{ type_string() }}) as job_id,
     {% endif %}
     cast(null as {{ type_string() }}) as materialization,
     cast(null as {{ type_string() }}) as schema,

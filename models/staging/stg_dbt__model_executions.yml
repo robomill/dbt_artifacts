@@ -24,6 +24,8 @@ models:
     description: '{{ doc("rows_affected") }}'
   - name: bytes_processed
     description: '{{ doc("bytes_processed") }}'
+  - name: job_id
+    description: '{{ doc("job_id") }}'
   - name: run_started_at
     description: '{{ doc("run_started_at") }}'
   - name: schema

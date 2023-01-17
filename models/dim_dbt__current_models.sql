@@ -26,6 +26,7 @@ latest_models_runs as (
         , model_executions.rows_affected
         {% if target.type == 'bigquery' %}
         , model_executions.bytes_processed
+        , model_executions.job_id
         {% endif %}
         , row_number() over (
             partition by latest_models.node_id, model_executions.was_full_refresh
@@ -50,6 +51,7 @@ latest_model_stats as (
         , max(rows_affected) as last_run_rows_affected
         {% if target.type == 'bigquery' %}
         , max(bytes_processed) as last_run_bytes_processed
+        , job_id as last_run_job_id,
         {% endif %}
     from latest_models_runs
     where run_idx = 1
@@ -70,6 +72,7 @@ final as (
         , latest_model_stats.last_run_rows_affected
         {% if target.type == 'bigquery' %}
         , latest_model_stats.last_run_bytes_processed
+        , latest_model_stats.last_run_job_id
         {% endif %}
     from latest_models
     left join latest_model_stats

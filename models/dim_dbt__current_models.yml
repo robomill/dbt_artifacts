@@ -26,6 +26,8 @@ models:
     description: '{{ doc("last_run_rows_affected") }}'
   - name: last_run_bytes_processed
     description: '{{ doc("last_run_bytes_processed") }}'
+  - name: last_run_job_id
+    description: '{{ doc("last_run_job_id") }}'
   - name: last_run_total_runtime
     description: '{{ doc("last_run_total_runtime") }}'
   - name: materialization

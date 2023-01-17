@@ -22,6 +22,8 @@ models:
     description: '{{ doc("rows_affected") }}'
   - name: bytes_affected
     description: '{{ doc("bytes_processed") }}'
+  - name: job_id
+    description: '{{ doc("job_id") }}'
   - name: schema
     description: '{{ doc("schema") }}'
   - name: status

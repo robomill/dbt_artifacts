@@ -82,6 +82,12 @@ Number of bytes processed by the model execution.
 
 {% enddocs %}
 
+{% docs job_id %}
+
+The job_id of the execution
+
+{% enddocs %}
+
 {% docs thread_id %}
 
 Which thread executed this node? E.g. Thread-1
@@ -362,6 +368,12 @@ Number of rows affected by the node's last run.
 {% docs last_run_bytes_processed %}
 
 Number of bytes processed by the node's last run.
+
+{% enddocs %}
+
+{% docs last_run_job_id %}
+
+The job_id of the node's last run.
 
 {% enddocs %}
 
