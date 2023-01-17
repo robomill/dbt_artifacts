@@ -40,6 +40,9 @@ latest_models_runs as (
 latest_model_stats as (
     select
         node_id
+        {% if target.type == 'bigquery' %}
+        , job_id as last_run_job_id
+        {% endif %}
         , max(case when was_full_refresh then query_completed_at end) as last_full_refresh_run_completed_at
         , max(case when was_full_refresh then total_node_runtime end) as last_full_refresh_run_total_runtime
         , max(case when was_full_refresh then rows_affected end) as last_full_refresh_run_rows_affected
@@ -51,11 +54,13 @@ latest_model_stats as (
         , max(rows_affected) as last_run_rows_affected
         {% if target.type == 'bigquery' %}
         , max(bytes_processed) as last_run_bytes_processed
-        , job_id as last_run_job_id,
         {% endif %}
     from latest_models_runs
     where run_idx = 1
     group by 1
+    {% if target.type == 'bigquery'  %}
+    , 2
+    {% endif %}
 ),
 
 final as (
